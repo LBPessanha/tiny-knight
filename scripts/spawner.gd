@@ -1,0 +1,35 @@
+extends Node2D
+
+# Qual cena vai ser "fabricada" (arraste o goblin.tscn no Inspector)
+@export var enemy_scene: PackedScene
+# A que distância do cavaleiro os inimigos nascem (fora da tela)
+@export var spawn_distance: float = 700.0
+# Limite de inimigos vivos ao mesmo tempo (protege o desempenho)
+@export var max_enemies: int = 30
+
+
+# Conectado pelo editor: Timer > aba Signals > timeout
+func _on_timer_timeout() -> void:
+	var player = get_tree().get_first_node_in_group("player")
+
+	# Sem cavaleiro, ou cavaleiro morto: para de gerar
+	if player == null or player.is_dead:
+		return
+
+	# Já tem goblin demais? Espera a próxima vez
+	if get_tree().get_node_count_in_group("enemies") >= max_enemies:
+		return
+
+	spawn_enemy(player.global_position)
+
+
+func spawn_enemy(center: Vector2) -> void:
+	# 1. Fabrica uma cópia nova da cena
+	var enemy = enemy_scene.instantiate()
+
+	# 2. Coloca no mundo (como filho do Game, "irmão" do cavaleiro)
+	get_parent().add_child(enemy)
+
+	# 3. Sorteia um ângulo e posiciona num círculo ao redor do cavaleiro
+	var angle := randf() * TAU
+	enemy.global_position = center + Vector2.RIGHT.rotated(angle) * spawn_distance
