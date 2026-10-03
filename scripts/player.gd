@@ -86,6 +86,13 @@ func take_damage(amount: int) -> void:
 	await tween.finished
 	is_invincible = false
 
+func heal(amount: int) -> void:
+	if is_dead:
+		return
+	# min() garante que a vida nunca passe do máximo
+	health = min(health + amount, max_health)
+	health_changed.emit(health, max_health)
+
 func die() -> void:
 	is_dead = true
 	velocity = Vector2.ZERO

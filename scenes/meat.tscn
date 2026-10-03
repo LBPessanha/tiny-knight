@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://deof3fd67b2y1"]
+
+[ext_resource type="Texture2D" uid="uid://ctgib7morpihb" path="res://assets/Tiny Swords/Resources/Resources/M_Idle.png" id="1_5xyno"]
+[ext_resource type="Script" uid="uid://cnm81eavue16r" path="res://scripts/meat.gd" id="1_jh885"]
+[ext_resource type="Texture2D" uid="uid://dgacm5xlfpvy2" path="res://assets/Tiny Swords/Resources/Resources/M_Spawn.png" id="2_jh885"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df1yr"]
+atlas = ExtResource("1_5xyno")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oo30y"]
+atlas = ExtResource("2_jh885")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lucir"]
+atlas = ExtResource("2_jh885")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcvon"]
+atlas = ExtResource("2_jh885")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk011"]
+atlas = ExtResource("2_jh885")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8co3"]
+atlas = ExtResource("2_jh885")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5chhc"]
+atlas = ExtResource("2_jh885")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fsx4"]
+atlas = ExtResource("2_jh885")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qf7sd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df1yr")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oo30y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lucir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kcvon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uk011")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8co3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5chhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fsx4")
+}],
+"loop": 0,
+"name": &"spawn",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf7sd"]
+radius = 20.0
+
+[node name="Meat" type="Area2D" unique_id=2105878818]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_jh885")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=201969619]
+sprite_frames = SubResource("SpriteFrames_qf7sd")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=453116152]
+shape = SubResource("CircleShape2D_qf7sd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

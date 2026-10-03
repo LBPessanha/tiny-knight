@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://o8ctsr4drj5x" path="res://scripts/goblin.gd" id="1_4yait"]
 [ext_resource type="Texture2D" uid="uid://dihfk0iv0s6tv" path="res://assets/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_tjgje"]
+[ext_resource type="PackedScene" uid="uid://deof3fd67b2y1" path="res://scenes/meat.tscn" id="2_q3g0h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_17tps"]
 atlas = ExtResource("1_tjgje")
@@ -256,6 +257,7 @@ collision_layer = 4
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_4yait")
+drop_scene = ExtResource("2_q3g0h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=105467835]
 sprite_frames = SubResource("SpriteFrames_8erdm")

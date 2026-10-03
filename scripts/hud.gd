@@ -3,6 +3,7 @@ extends CanvasLayer
 # O % acessa nós marcados como "Unique Name" (nome único) na cena
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var kills_label: Label = %KillsLabel
+@onready var meat_label: Label = %MeatLabel
 @onready var time_label: Label = %TimeLabel
 
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	kills_label.text = "Goblins: %d" % GameManager.enemies_defeated
+	meat_label.text = "Carne: %d" % GameManager.meat_collected
 
 	var minutes := floori(GameManager.time_elapsed / 60)
 	var seconds := int(GameManager.time_elapsed) % 60

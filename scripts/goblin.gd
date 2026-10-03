@@ -5,6 +5,12 @@ extends CharacterBody2D
 @export var damage: int = 1
 @export var attack_range: float = 60.0
 
+@export_group("Drop")
+# Qual item pode cair (arraste o meat.tscn no Inspector)
+@export var drop_scene: PackedScene
+# Chance de cair: 0.25 = 25%
+@export_range(0.0, 1.0) var drop_chance: float = 0.25 
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var player: Node2D
@@ -66,7 +72,17 @@ func take_damage(amount: int) -> void:
 
 func die() -> void:
 	GameManager.enemies_defeated += 1
+	try_drop()
 	queue_free()
+	
+
+func try_drop() -> void:
+	# randf() sorteia um número entre 0.0 e 1.0
+	if drop_scene and randf() < drop_chance:
+		var drop = drop_scene.instantiate()
+		drop.position = position
+		# call_deferred = "faça isso assim que for seguro" (fim do quadro)
+		get_parent().add_child.call_deferred(drop)
 
 
 # Conectado pelo editor: aba Signals > frame_changed

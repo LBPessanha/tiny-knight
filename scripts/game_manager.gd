@@ -5,6 +5,7 @@ signal game_over
 
 var time_elapsed: float = 0.0
 var enemies_defeated: int = 0
+var meat_collected: int = 0
 var is_game_over: bool = false
 
 # Área andável da ilha (preenchida pelo game.gd)
@@ -27,4 +28,5 @@ func end_game() -> void:
 func reset() -> void:
 	time_elapsed = 0.0
 	enemies_defeated = 0
+	meat_collected = 0
 	is_game_over = false
