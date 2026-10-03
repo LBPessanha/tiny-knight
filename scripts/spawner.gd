@@ -33,3 +33,22 @@ func spawn_enemy(center: Vector2) -> void:
 	# 3. Sorteia um ângulo e posiciona num círculo ao redor do cavaleiro
 	var angle := randf() * TAU
 	enemy.global_position = center + Vector2.RIGHT.rotated(angle) * spawn_distance
+	
+func find_spawn_position(center: Vector2) -> Vector2:
+	var rect:Rect2 = GameManager.world_rect
+	
+	# Sem limites definidos? Usa o círculo normal
+	if not rect.has_area():
+		return center + Vector2.RIGHT.rotated(randf() * TAU) * spawn_distance
+	
+	# Tenta até 10 ângulos sorteados até achar um ponto DENTRO da ilha
+	for i in 10:
+		var pos := center + Vector2.RIGHT.rotated(randf() * TAU) * spawn_distance
+		if rect.has_point(pos):
+			return pos
+	
+	# Não achou? "Empurra" o ponto para dentro da ilha
+	var fallback := center + Vector2.RIGHT.rotated(randf() * TAU) * spawn_distance
+	return fallback.clamp(rect.position, rect.end)
+		
+	

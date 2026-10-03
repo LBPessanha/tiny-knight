@@ -7,6 +7,9 @@ var time_elapsed: float = 0.0
 var enemies_defeated: int = 0
 var is_game_over: bool = false
 
+# Área andável da ilha (preenchida pelo game.gd)
+var world_rect: Rect2 = Rect2()
+
 
 func _process(delta: float) -> void:
 	# O relógio só anda enquanto o jogo está rolando
