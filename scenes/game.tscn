@@ -57,19 +57,22 @@ tile_set = SubResource("TileSet_ikrja")
 tile_map_data = PackedByteArray("AAACAAEAAQABAAEAAAACAAIAAQABAAIAAAADAAIAAQACAAIAAAADAAEAAQACAAEAAAADAAAAAQACAAAAAAACAAAAAQABAAAAAAABAAAAAQAAAAAAAAABAAEAAQAAAAEAAAABAAIAAQAAAAIAAAA=")
 tile_set = ExtResource("1_p57ef")
 
-[node name="Player" parent="." unique_id=1680021191 instance=ExtResource("1_uwrxv")]
+[node name="Entities" type="Node2D" parent="." unique_id=1706396832]
+y_sort_enabled = true
+
+[node name="Player" parent="Entities" unique_id=1680021191 instance=ExtResource("1_uwrxv")]
 position = Vector2(574, 324)
 sword_damage = 2
 max_health = 100
 
-[node name="Spawner" type="Node2D" parent="." unique_id=1834659294]
+[node name="Spawner" type="Node2D" parent="Entities" unique_id=1834659294]
 script = ExtResource("2_lnu2h")
 enemy_scene = ExtResource("2_yqjtg")
 
-[node name="Timer" type="Timer" parent="Spawner" unique_id=856364539]
+[node name="Timer" type="Timer" parent="Entities/Spawner" unique_id=856364539]
 wait_time = 1.5
 autostart = true
 
 [node name="HUD" parent="." unique_id=371587717 instance=ExtResource("4_lbhrr")]
 
-[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Entities/Spawner/Timer" to="Entities/Spawner" method="_on_timer_timeout"]
