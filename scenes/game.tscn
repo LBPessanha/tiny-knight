@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b2fs24nwvkyh" path="res://assets/Tiny Swords/Terrain/Ground/Tilemap_Elevation.png" id="2_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cwjfo2igynyg8" path="res://scenes/goblin.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://c7yw2bbgindmt" path="res://scenes/hud.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://76t2b5imbs6j" path="res://scenes/sheep.tscn" id="7_gee14"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5sy4"]
 texture = ExtResource("2_p57ef")
@@ -96,14 +97,28 @@ position = Vector2(574, 324)
 sword_damage = 2
 max_health = 100
 
-[node name="Spawner" type="Node2D" parent="Entities" unique_id=1834659294]
+[node name="GoblinSpawner" type="Node2D" parent="Entities" unique_id=1834659294]
 script = ExtResource("2_lnu2h")
 enemy_scene = ExtResource("2_yqjtg")
+spawn_distance = 1400.0
+max_enemies = 15
 
-[node name="Timer" type="Timer" parent="Entities/Spawner" unique_id=856364539]
+[node name="Timer" type="Timer" parent="Entities/GoblinSpawner" unique_id=856364539]
 wait_time = 1.5
+autostart = true
+
+[node name="SheepSpawner" type="Node2D" parent="Entities" unique_id=186172259]
+script = ExtResource("2_lnu2h")
+enemy_scene = ExtResource("7_gee14")
+spawn_distance = 1400.0
+max_enemies = 6
+count_group = "sheep"
+
+[node name="Timer" type="Timer" parent="Entities/SheepSpawner" unique_id=521190670]
+wait_time = 5.0
 autostart = true
 
 [node name="HUD" parent="." unique_id=371587717 instance=ExtResource("4_lbhrr")]
 
-[connection signal="timeout" from="Entities/Spawner/Timer" to="Entities/Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Entities/GoblinSpawner/Timer" to="Entities/GoblinSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Entities/SheepSpawner/Timer" to="Entities/SheepSpawner" method="_on_timer_timeout"]

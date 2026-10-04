@@ -6,6 +6,8 @@ extends Node2D
 @export var spawn_distance: float = 700.0
 # Limite de inimigos vivos ao mesmo tempo (protege o desempenho)
 @export var max_enemies: int = 30
+# Qual grupo contar para respeitar o limite ("enemies", "sheep"...)
+@export var count_group: String = "enemies"
 
 
 # Conectado pelo editor: Timer > aba Signals > timeout
@@ -17,11 +19,10 @@ func _on_timer_timeout() -> void:
 		return
 
 	# Já tem goblin demais? Espera a próxima vez
-	if get_tree().get_node_count_in_group("enemies") >= max_enemies:
+	if get_tree().get_node_count_in_group(count_group) >= max_enemies:
 		return
 
 	spawn_enemy(player.global_position)
-
 
 func spawn_enemy(center: Vector2) -> void:
 	# 1. Fabrica uma cópia nova da cena
@@ -30,9 +31,9 @@ func spawn_enemy(center: Vector2) -> void:
 	# 2. Coloca no mundo (como filho do Game, "irmão" do cavaleiro)
 	get_parent().add_child(enemy)
 
-	# 3. Sorteia um ângulo e posiciona num círculo ao redor do cavaleiro
-	var angle := randf() * TAU
-	enemy.global_position = center + Vector2.RIGHT.rotated(angle) * spawn_distance
+	# 3. Posiciona num ponto válido DENTRO da ilha
+	enemy.global_position = find_spawn_position(center)
+	enemy.reset_physics_interpolation()
 	
 func find_spawn_position(center: Vector2) -> Vector2:
 	var rect:Rect2 = GameManager.world_rect

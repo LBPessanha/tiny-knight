@@ -19,7 +19,6 @@ func _ready() -> void:
 	add_to_group("player")
 	health = max_health
 
-
 func _physics_process(_delta: float) -> void:
 	# Morto não se mexe
 	if is_dead:
@@ -38,7 +37,6 @@ func _physics_process(_delta: float) -> void:
 
 	velocity = Vector2.ZERO if is_attacking else direction * speed
 	move_and_slide()
-
 
 func attack(direction: Vector2) -> void:
 	is_attacking = true
@@ -59,11 +57,9 @@ func attack(direction: Vector2) -> void:
 	await get_tree().create_timer(0.2).timeout
 	deal_damage()
 
-
 func deal_damage() -> void:
-	# Pega todos os corpos que estão dentro da área da espada agora
 	for body in sword_area.get_overlapping_bodies():
-		if body.is_in_group("enemies"):
+		if body.has_method("take_damage"):
 			body.take_damage(sword_damage)
 
 func take_damage(amount: int) -> void:
