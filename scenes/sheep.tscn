@@ -121,15 +121,16 @@ radius = 12.0
 
 [node name="Sheep" type="CharacterBody2D" unique_id=451477059]
 collision_layer = 8
-collision_mask = 9
 motion_mode = 1
 script = ExtResource("1_6qn06")
+speed = 100.0
 drop_scene = ExtResource("2_55m3e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=767635730]
 sprite_frames = SubResource("SpriteFrames_qf7sd")
 animation = &"move"
 autoplay = "idle"
+frame_progress = 0.85359585
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1092823554]

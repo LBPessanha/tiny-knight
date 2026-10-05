@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cwjfo2igynyg8" path="res://scenes/goblin.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://c7yw2bbgindmt" path="res://scenes/hud.tscn" id="4_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://76t2b5imbs6j" path="res://scenes/sheep.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://b11pmkiqaytis" path="res://scenes/tnt_goblin.tscn" id="8_vtaks"]
+[ext_resource type="Script" uid="uid://dqyu3f128bkw8" path="res://scripts/difficulty_system.gd" id="9_0tnpc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5sy4"]
 texture = ExtResource("2_p57ef")
@@ -110,7 +112,6 @@ autostart = true
 [node name="SheepSpawner" type="Node2D" parent="Entities" unique_id=186172259]
 script = ExtResource("2_lnu2h")
 enemy_scene = ExtResource("7_gee14")
-spawn_distance = 1400.0
 max_enemies = 6
 count_group = "sheep"
 
@@ -118,7 +119,24 @@ count_group = "sheep"
 wait_time = 5.0
 autostart = true
 
+[node name="TNTSpawner" type="Node2D" parent="Entities" unique_id=1425015801]
+script = ExtResource("2_lnu2h")
+enemy_scene = ExtResource("8_vtaks")
+spawn_distance = 1400.0
+max_enemies = 4
+count_group = "tnt"
+
+[node name="Timer" type="Timer" parent="Entities/TNTSpawner" unique_id=1399498071]
+wait_time = 6.0
+
 [node name="HUD" parent="." unique_id=371587717 instance=ExtResource("4_lbhrr")]
+
+[node name="DifficultySystem" type="Node" parent="." unique_id=459062455 node_paths=PackedStringArray("spawner", "tnt_spawner")]
+script = ExtResource("9_0tnpc")
+spawner = NodePath("../Entities/GoblinSpawner")
+tnt_spawner = NodePath("../Entities/TNTSpawner")
+tnt_unlock_time = 5.0
 
 [connection signal="timeout" from="Entities/GoblinSpawner/Timer" to="Entities/GoblinSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Entities/SheepSpawner/Timer" to="Entities/SheepSpawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Entities/TNTSpawner/Timer" to="Entities/TNTSpawner" method="_on_timer_timeout"]

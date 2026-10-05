@@ -33,12 +33,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 
-		move_and_slide()
+	move_and_slide()
 
 	# Bateu em algo enquanto andava? Quica e segue no sentido oposto
 	if get_slide_collision_count() > 0 and not is_fleeing and velocity != Vector2.ZERO:
 		var normal := get_slide_collision(0).get_normal()
-		direction = direction.bounce(normal)
+		# Só quica se estiver indo CONTRA a parede
+		if direction.dot(normal) < 0:
+			direction = direction.bounce(normal)
 	
 	
 	if direction.x != 0:

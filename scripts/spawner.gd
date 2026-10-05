@@ -50,6 +50,7 @@ func find_spawn_position(center: Vector2) -> Vector2:
 	
 	# Não achou? "Empurra" o ponto para dentro da ilha
 	var fallback := center + Vector2.RIGHT.rotated(randf() * TAU) * spawn_distance
-	return fallback.clamp(rect.position, rect.end)
+	var margin := Vector2(64, 64)
+	return fallback.clamp(rect.position + margin, rect.end - margin)
 		
 	
