@@ -260,6 +260,7 @@ script = ExtResource("1_4yait")
 drop_scene = ExtResource("2_q3g0h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=105467835]
+position = Vector2(-15, 24)
 sprite_frames = SubResource("SpriteFrames_8erdm")
 animation = &"attack_up"
 autoplay = "idle"

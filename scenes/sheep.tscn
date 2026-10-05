@@ -130,7 +130,7 @@ drop_scene = ExtResource("2_55m3e")
 sprite_frames = SubResource("SpriteFrames_qf7sd")
 animation = &"move"
 autoplay = "idle"
-frame_progress = 0.85359585
+frame_progress = 0.81317556
 speed_scale = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1092823554]

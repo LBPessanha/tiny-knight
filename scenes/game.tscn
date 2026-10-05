@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://76t2b5imbs6j" path="res://scenes/sheep.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://b11pmkiqaytis" path="res://scenes/tnt_goblin.tscn" id="8_vtaks"]
 [ext_resource type="Script" uid="uid://dqyu3f128bkw8" path="res://scripts/difficulty_system.gd" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://ds352gx6jytov" path="res://scenes/game_over_ui.tscn" id="11_kvpfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5sy4"]
 texture = ExtResource("2_p57ef")
@@ -136,6 +137,8 @@ script = ExtResource("9_0tnpc")
 spawner = NodePath("../Entities/GoblinSpawner")
 tnt_spawner = NodePath("../Entities/TNTSpawner")
 tnt_unlock_time = 5.0
+
+[node name="GameOverUI" parent="." unique_id=961125046 instance=ExtResource("11_kvpfn")]
 
 [connection signal="timeout" from="Entities/GoblinSpawner/Timer" to="Entities/GoblinSpawner" method="_on_timer_timeout"]
 [connection signal="timeout" from="Entities/SheepSpawner/Timer" to="Entities/SheepSpawner" method="_on_timer_timeout"]
