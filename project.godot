@@ -24,6 +24,10 @@ GameManager="*uid://ck1g3hwdgxrl"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[gui]
+
+theme/custom_font="uid://cgu7pqt82ndms"
+
 [input]
 
 move_left={
