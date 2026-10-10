@@ -22,7 +22,6 @@ GameManager="*uid://ck1g3hwdgxrl"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [gui]
 

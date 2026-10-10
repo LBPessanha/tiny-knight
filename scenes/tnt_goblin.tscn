@@ -164,6 +164,7 @@ collision_layer = 4
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_ojhqj")
+health = 3
 dynamite_scene = ExtResource("2_utn2a")
 drop_scene = ExtResource("3_6lluj")
 
